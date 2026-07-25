@@ -25,6 +25,17 @@ Module has been tested on:
 
 For the official list of all tested distributions, please take a look at the metadata.json.
 
+You can use `override_os_supported_names` to add an operating system that is
+not in that list when, in your judgment, it is compatible with this module.
+Operating systems added this way have not been tested or declared supported by
+the module maintainers; you are responsible for validating the module on them.
+
+```puppet
+class { 'yum':
+  override_os_supported_names => ['Alibaba'],
+}
+```
+
 ## Usage
 
 ### Manage global Yum configuration via the primary class

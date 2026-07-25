@@ -128,6 +128,7 @@ The following parameters are available in the `yum` class:
 * [`repos`](#-yum--repos)
 * [`managed_repos`](#-yum--managed_repos)
 * [`manage_os_default_repos`](#-yum--manage_os_default_repos)
+* [`override_os_supported_names`](#-yum--override_os_supported_names)
 * [`os_default_repos`](#-yum--os_default_repos)
 * [`repo_exclusions`](#-yum--repo_exclusions)
 * [`gpgkeys`](#-yum--gpgkeys)
@@ -202,6 +203,16 @@ Whether or not to add an operating system's default repos to the `managed_repos`
   the module only contains data for for CentOS 6 & 7.
 
 Default value: `false`
+
+##### <a name="-yum--override_os_supported_names"></a>`override_os_supported_names`
+
+Data type: `Array[String]`
+
+Additional operating system names to treat as supported. Use this to opt in an operating system
+that is not listed in the module metadata when, in your judgment, it is compatible. The module
+does not validate or provide support for operating systems added through this parameter.
+
+Default value: `[]`
 
 ##### <a name="-yum--os_default_repos"></a>`os_default_repos`
 

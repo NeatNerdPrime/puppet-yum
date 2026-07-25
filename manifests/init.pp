@@ -38,6 +38,11 @@
 #   @note This only works for operating systems with data in the module's data directory.  Currently
 #     the module only contains data for for CentOS 6 & 7.
 #
+# @param override_os_supported_names
+#   Additional operating system names to treat as supported. Use this to opt in an operating system
+#   that is not listed in the module metadata when, in your judgment, it is compatible. The module
+#   does not validate or provide support for operating systems added through this parameter.
+#
 # @param os_default_repos
 #   A list of default repos to add to `managed_repos` if `manage_os_default_repos` is enabled.
 #   Normally this should not be modified.
@@ -118,6 +123,7 @@ class yum (
   Hash[String, Optional[Hash[String, Variant[String, Integer, Boolean]]]] $repos = {},
   Array[String] $managed_repos = [],
   Boolean $manage_os_default_repos = false,
+  Array[String] $override_os_supported_names = [],
   Array[String] $os_default_repos = [],
   Array[String] $repo_exclusions = [],
   Hash[String, Hash[String, String]] $gpgkeys = {},
@@ -128,7 +134,7 @@ class yum (
 ) {
   $module_metadata            = load_module_metadata($module_name)
   $supported_operatingsystems = $module_metadata['operatingsystem_support']
-  $supported_os_names         = $supported_operatingsystems.map |$os| {
+  $supported_os_names         = $override_os_supported_names + $supported_operatingsystems.map |$os| {
     $os['operatingsystem']
   }
 
