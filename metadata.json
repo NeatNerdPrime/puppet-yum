@@ -26,6 +26,12 @@
   ],
   "operatingsystem_support": [
     {
+      "operatingsystem": "Alibaba",
+      "operatingsystemrelease": [
+        "3"
+      ]
+    },
+    {
       "operatingsystem": "AlmaLinux",
       "operatingsystemrelease": [
         "8",
