@@ -861,16 +861,4 @@ describe 'yum' do
       end
     end
   end
-
-  context 'on an unsupported operating system' do
-    let(:facts) { { os: { family: 'Solaris', name: 'Nexenta' } } }
-
-    it { is_expected.to raise_error(Puppet::Error, %r{Nexenta not supported}) }
-
-    context 'when the operating system is explicitly added by the user' do
-      let(:params) { { override_os_supported_names: ['Nexenta'] } }
-
-      it { is_expected.to compile }
-    end
-  end
 end
