@@ -25,6 +25,10 @@ Module has been tested on:
 
 For the official list of all tested distributions, please take a look at the metadata.json.
 
+The module does not prevent use on operating systems that are absent from that
+list. You may use it on another compatible operating system based on your own
+judgment, but you are responsible for testing and validating that use.
+
 ## Usage
 
 ### Manage global Yum configuration via the primary class

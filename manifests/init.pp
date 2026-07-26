@@ -126,16 +126,6 @@ class yum (
   Stdlib::CreateResources $post_transaction_actions = {},
   Stdlib::CreateResources $versionlocks = {},
 ) {
-  $module_metadata            = load_module_metadata($module_name)
-  $supported_operatingsystems = $module_metadata['operatingsystem_support']
-  $supported_os_names         = $supported_operatingsystems.map |$os| {
-    $os['operatingsystem']
-  }
-
-  unless member($supported_os_names, $facts['os']['name']) {
-    fail("${facts['os']['name']} not supported")
-  }
-
   $_managed_repos = $manage_os_default_repos ? {
     true    => $managed_repos + $os_default_repos,
     default => $managed_repos,
