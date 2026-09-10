@@ -4,6 +4,7 @@
 # @param ensure specifies if versionlock should be present or absent
 # @param clean specifies if yum clean all should be called after edits. Defaults false.
 # @param path filepath for the versionlock.list, default based on your system.
+# @param confpath filepath for the versionlock.conf package, default based on your system.
 #
 # @example Sample usage:
 #   class { 'yum::plugin::versionlock':
@@ -12,6 +13,7 @@
 #
 class yum::plugin::versionlock (
   String                    $path,
+  Stdlib::Unixpath          $confpath,
   Enum['present', 'absent'] $ensure   = 'present',
   Boolean                   $clean    = false,
 ) {
@@ -44,6 +46,17 @@ class yum::plugin::versionlock (
       target  => $path,
       content => "# File managed by puppet\n",
       order   => '01',
+    }
+
+    augeas { 'enable_versionlock_plugin':
+      incl    => $confpath,
+      lens    => 'Yum.lns',
+      context => "/files${confpath}/main/",
+      changes => [
+        "set enabled '1'",
+        "set locklist '${path}'",
+      ],
+      require => Yum::Plugin['versionlock'],
     }
   }
 }
