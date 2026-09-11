@@ -18,10 +18,31 @@ describe 'yum::plugin::versionlock' do
             it { is_expected.to contain_package('yum-plugin-versionlock').with_ensure('present') }
             it { is_expected.not_to contain_package('python3-dnf-plugin-versionlock') }
             it { is_expected.to contain_concat__fragment('versionlock_header').with_target('/etc/yum/pluginconf.d/versionlock.list') }
+
+            it {
+              is_expected.to contain_augeas('enable_versionlock_plugin').with(
+                {
+                  incl: '/etc/yum/pluginconf.d/versionlock.conf',
+                  context: '/files/etc/yum/pluginconf.d/versionlock.conf/main/',
+                  changes: ["set enabled '1'", "set locklist '/etc/yum/pluginconf.d/versionlock.list'"],
+                },
+              )
+            }
           else
             it { is_expected.to contain_package('python3-dnf-plugin-versionlock').with_ensure('present') }
             it { is_expected.not_to contain_package('yum-plugin-versionlock') }
             it { is_expected.to contain_concat__fragment('versionlock_header').with_target('/etc/dnf/plugins/versionlock.list') }
+
+            it {
+              is_expected.to contain_augeas('enable_versionlock_plugin').with(
+                {
+                  incl: '/etc/dnf/plugins/versionlock.conf',
+                  context: '/files/etc/dnf/plugins/versionlock.conf/main/',
+                  changes: ["set enabled '1'", "set locklist '/etc/dnf/plugins/versionlock.list'"],
+                },
+              )
+            }
+
           end
           context 'with plugin disable' do
             let(:params) do
@@ -30,6 +51,7 @@ describe 'yum::plugin::versionlock' do
 
             it { is_expected.to compile.with_all_deps }
             it { is_expected.not_to contain_concat__fragment('versionlock_header') }
+            it { is_expected.not_to contain_augeas('enable_versionlock_plugin') }
 
             case provider
             when 'yum'

@@ -321,6 +321,7 @@ The following parameters are available in the `yum::plugin::versionlock` class:
 * [`ensure`](#-yum--plugin--versionlock--ensure)
 * [`clean`](#-yum--plugin--versionlock--clean)
 * [`path`](#-yum--plugin--versionlock--path)
+* [`confpath`](#-yum--plugin--versionlock--confpath)
 
 ##### <a name="-yum--plugin--versionlock--ensure"></a>`ensure`
 
@@ -345,6 +346,14 @@ Data type: `String`
 filepath for the versionlock.list, default based on your system.
 
 Default value: `'/etc/yum/pluginconf.d/versionlock.list'`
+
+##### <a name="-yum--plugin--versionlock--confpath"></a>`confpath`
+
+Data type: `Stdlib::Unixpath`
+
+filepath for the versionlock.conf package, default based on your system.
+
+Default value: `'/etc/yum/pluginconf.d/versionlock.conf'`
 
 ### <a name="yum--settings"></a>`yum::settings`
 
