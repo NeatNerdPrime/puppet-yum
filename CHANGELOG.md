@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v8.2.0](https://github.com/voxpupuli/puppet-yum/tree/v8.2.0) (2026-09-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v8.1.1...v8.2.0)
+
+**Implemented enhancements:**
+
+- Actively ensure versionlock module is enabled [\#395](https://github.com/voxpupuli/puppet-yum/pull/395) ([traylenator](https://github.com/traylenator))
+- Remove test preventing use on unsupported OS [\#393](https://github.com/voxpupuli/puppet-yum/pull/393) ([jorhett](https://github.com/jorhett))
+
 ## [v8.1.1](https://github.com/voxpupuli/puppet-yum/tree/v8.1.1) (2026-07-21)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-yum/compare/v8.1.0...v8.1.1)
