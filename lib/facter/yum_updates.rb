@@ -6,7 +6,7 @@ Facter.add('yum_package_updates') do
     yum_updates = []
 
     if File.executable?('/usr/bin/yum')
-      yum_get_result = Facter::Util::Resolution.exec('/usr/bin/yum --assumeyes --quiet --cacheonly list updates')
+      yum_get_result = Facter::Core::Execution.execute('/usr/bin/yum --assumeyes --quiet --cacheonly list updates')
       yum_get_result&.each_line do |line|
         %r{\A(?<package>\S+\.\S+)\s+(?<available_version>[[:digit:]]\S+)\s+(?<repository>\S+)\s*\z} =~ line
         yum_updates.push(package) if package && available_version && repository
