@@ -17,7 +17,7 @@ describe 'dnf_version fact' do
   end
 
   it 'is nil without dnf' do
-    allow(Facter::Util::Resolution).to receive(:which).with('dnf').and_return(nil)
+    allow(Facter::Core::Execution).to receive(:which).with('dnf').and_return(nil)
     expect(dnf_version).to be_nil
   end
 
@@ -153,7 +153,7 @@ describe 'dnf_version fact' do
     ].each do |example|
       context "with #{example[:os]} example" do
         it do
-          allow(Facter::Util::Resolution).to receive(:which).with('dnf').and_return('/usr/bin/dnf')
+          allow(Facter::Core::Execution).to receive(:which).with('dnf').and_return('/usr/bin/dnf')
           allow(Facter::Core::Execution).to receive(:execute).with('/usr/bin/dnf --version', on_fail: nil).and_return(example[:command_output])
           expect(dnf_version).to eq(example[:expected])
         end

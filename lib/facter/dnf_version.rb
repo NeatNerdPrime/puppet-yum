@@ -3,7 +3,7 @@
 Facter.add(:dnf_version) do
   confine package_provider: 'dnf'
   setcode do
-    dnf = Facter::Util::Resolution.which('dnf')
+    dnf = Facter::Core::Execution.which('dnf')
     next unless dnf
 
     output = Facter::Core::Execution.execute("#{dnf} --version", on_fail: nil)
